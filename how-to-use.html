@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Use Your Template — Luminota Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF7F2;
+      --cream-dark: #F2EDE4;
+      --ink: #1A1A18;
+      --ink-mid: #4A4A46;
+      --ink-light: #8A8A84;
+      --teal: #1D6B6B;
+      --teal-light: #2A8C8C;
+      --teal-pale: #E4F0F0;
+      --amber: #C4763A;
+      --amber-pale: #FDF0E6;
+      --amber-dark: #7A3F10;
+      --border: rgba(29, 107, 107, 0.12);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Outfit', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(250, 247, 242, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .wordmark {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 500; letter-spacing: 0.04em;
+      color: var(--teal); text-decoration: none;
+    }
+    .wordmark span { color: var(--ink); }
+    .nav-back {
+      font-size: 13px; color: var(--ink-mid);
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--teal); }
+
+    /* ── PAGE ── */
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 120px 40px 100px;
+    }
+
+    .page-eyebrow {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .page-eyebrow::before {
+      content: ''; display: block;
+      width: 20px; height: 1px; background: var(--teal);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 6vw, 58px);
+      font-weight: 300; line-height: 1.05;
+      color: var(--ink); margin-bottom: 16px;
+    }
+    h1 em { font-style: italic; color: var(--teal); }
+
+    .page-intro {
+      font-size: 16px; font-weight: 300; color: var(--ink-mid);
+      line-height: 1.7; margin-bottom: 56px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── STEPS ── */
+    .steps { display: flex; flex-direction: column; gap: 0; }
+
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0 24px;
+      padding-bottom: 48px;
+      position: relative;
+    }
+
+    /* vertical connector line */
+    .step:not(:last-child) .step-num::after {
+      content: '';
+      position: absolute;
+      left: 23px; top: 48px;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .step-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--teal-pale);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      position: relative; z-index: 1;
+    }
+
+    .step-body { padding-top: 10px; }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 26px; font-weight: 400;
+      color: var(--ink); margin-bottom: 10px; line-height: 1.2;
+    }
+
+    .step-desc {
+      font-size: 14px; font-weight: 300; color: var(--ink-mid);
+      line-height: 1.7; margin-bottom: 0;
+    }
+
+    /* inline instruction block */
+    .instruction {
+      margin-top: 16px;
+      background: var(--cream-dark);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .instruction-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .instruction-text {
+      font-size: 13px; color: var(--ink-mid); line-height: 1.65;
+    }
+    .instruction-text strong { color: var(--ink); font-weight: 500; }
+
+    /* sub-items */
+    .sub-items {
+      margin-top: 16px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .sub-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: var(--ink-mid);
+    }
+    .sub-item-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--teal); flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    /* ── ALERT ── */
+    .alert {
+      margin-top: 16px;
+      background: var(--amber-pale);
+      border: 1px solid rgba(196, 118, 58, 0.25);
+      border-left: 3px solid var(--amber);
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex; align-items: flex-start; gap: 12px;
+    }
+    .alert-icon { font-size: 20px; flex-shrink: 0; }
+    .alert-body {}
+    .alert-title {
+      font-size: 13px; font-weight: 600;
+      color: var(--amber-dark); margin-bottom: 6px;
+    }
+    .alert-text {
+      font-size: 13px; color: var(--amber-dark);
+      line-height: 1.65; opacity: 0.85;
+    }
+    .alert-text strong { opacity: 1; font-weight: 500; }
+
+    /* offline steps */
+    .offline-steps {
+      margin-top: 12px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .offline-step {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 13px; color: var(--amber-dark); opacity: 0.85;
+    }
+    .offline-step-n {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: rgba(196, 118, 58, 0.15);
+      border: 1px solid rgba(196, 118, 58, 0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 600; color: var(--amber);
+      flex-shrink: 0; margin-top: 1px;
+    }
+
+    .alert-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      margin-top: 12px;
+      font-size: 12px; color: var(--teal);
+      text-decoration: none; font-weight: 500;
+      border-bottom: 1px solid rgba(29, 107, 107, 0.3);
+      padding-bottom: 1px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .alert-link:hover { color: var(--teal-light); border-color: var(--teal-light); }
+
+    /* ── CLOSING ── */
+    .closing {
+      margin-top: 8px;
+      padding: 36px;
+      background: var(--teal);
+      border-radius: 16px;
+      text-align: center;
+    }
+    .closing-text {
+      font-family: var(--font-display);
+      font-size: 26px; font-weight: 300; font-style: italic;
+      color: rgba(250, 247, 242, 0.92);
+      line-height: 1.3; margin-bottom: 8px;
+    }
+    .closing-sub {
+      font-size: 13px; color: rgba(250, 247, 242, 0.55);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px; margin-top: 80px;
+    }
+    .footer-wordmark {
+      font-family: var(--font-display); font-size: 18px; font-weight: 400;
+      color: var(--teal); letter-spacing: 0.04em;
+    }
+    .footer-note { font-size: 12px; color: var(--ink-light); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .page-eyebrow { animation: fadeUp 0.5s ease both; }
+    h1 { animation: fadeUp 0.6s 0.08s ease both; }
+    .page-intro { animation: fadeUp 0.6s 0.16s ease both; }
+    .steps { animation: fadeUp 0.6s 0.24s ease both; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      .page { padding: 100px 20px 80px; }
+      footer { padding: 28px 20px; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="wordmark" href="index.html">Luminota<span>Studio</span></a>
+    <a class="nav-back" href="index.html">← Back to product page</a>
+  </nav>
+
+  <div class="page">
+
+    <p class="page-eyebrow">Getting started</p>
+    <h1>You're three steps<br />away from <em>ready.</em></h1>
+    <p class="page-intro">No setup. No accounts. No learning curve. Here's everything you need to go from purchase to planning in under five minutes.</p>
+
+    <div class="steps">
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-num">✦</div>
+        <div class="step-body">
+          <p class="step-title">Duplicate the template into your Notion</p>
+          <p class="step-desc">When you open your purchase link, you'll land on the Luminota template page in Notion. Look for the <strong>Duplicate</strong> button in the top-right corner of the page — it looks like two overlapping squares. Click it, and Notion will copy the entire workspace directly into your account.</p>
+          <div class="instruction">
+            <span class="instruction-icon">💡</span>
+            <p class="instruction-text">You'll need a free Notion account to duplicate. If you don't have one yet, Notion will prompt you to sign up — it takes about a minute and the free plan is all you need.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step">
+        <div class="step-num">✦</div>
+        <div class="step-body">
+          <p class="step-title">Start with Trip Logistics</p>
+          <p class="step-desc">This is where your pre-trip planning lives. Open the Trip Logistics section and work through each hub to make the template yours.</p>
+          <div class="sub-items">
+            <div class="sub-item">
+              <div class="sub-item-dot"></div>
+              <span><strong>Accommodations</strong> — add your lodge bookings, confirmation numbers, check-in and check-out dates</span>
+            </div>
+            <div class="sub-item">
+              <div class="sub-item-dot"></div>
+              <span><strong>Flights</strong> — log your flight details, confirmation codes, and arrival times</span>
+            </div>
+            <div class="sub-item">
+              <div class="sub-item-dot"></div>
+              <span><strong>Car Rental</strong> — track your rental details, pickup location, and return info</span>
+            </div>
+            <div class="sub-item">
+              <div class="sub-item-dot"></div>
+              <span><strong>Packing List</strong> — built specifically for Yellowstone and Grand Teton, check things off as you pack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step">
+        <div class="step-num">✦</div>
+        <div class="step-body">
+          <p class="step-title">Browse your itinerary — and make it yours</p>
+          <p class="step-desc">The day-by-day itinerary is fully built out and ready to use as-is. Each day has its route, attractions, drive times, and lodging already mapped. You don't need to change anything — but you can.</p>
+          <div class="instruction">
+            <span class="instruction-icon">✏️</span>
+            <p class="instruction-text">Feel free to add your own <strong>notes</strong>, <strong>photos</strong>, and <strong>memos</strong> to any day or attraction card. Notion makes it easy — just click into any page and start typing or drag in an image.</p>
+          </div>
+
+          <!-- ALERT -->
+          <div class="alert">
+            <span class="alert-icon">⚠️</span>
+            <div class="alert-body">
+              <p class="alert-title">Important: No cell signal inside the parks</p>
+              <p class="alert-text">Most of Yellowstone and Grand Teton has little to no cell service. Make sure to enable <strong>offline mode in Notion</strong> before you leave — otherwise your template won't be accessible once you're inside the park.</p>
+              <div class="offline-steps">
+                <div class="offline-step">
+                  <div class="offline-step-n">1</div>
+                  <span>Open the Notion app on your phone or tablet</span>
+                </div>
+                <div class="offline-step">
+                  <div class="offline-step-n">2</div>
+                  <span>Go to <strong>Settings → Account Settings</strong></span>
+                </div>
+                <div class="offline-step">
+                  <div class="offline-step-n">3</div>
+                  <span>Scroll to <strong>Offline Mode</strong> and toggle it on</span>
+                </div>
+                <div class="offline-step">
+                  <div class="offline-step-n">4</div>
+                  <span>Open your template while on Wi-Fi to cache it — then it's available without signal</span>
+                </div>
+              </div>
+              <a class="alert-link" href="https://www.notion.com/help/guides/working-offline-in-notion-everything-you-need-to-know" target="_blank" rel="noopener">
+                Full offline mode guide from Notion →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CLOSING -->
+    <div class="closing">
+      <p class="closing-text">That's it. You're ready to plan.</p>
+      <p class="closing-sub">Questions? Reach us at hello@luminotastudio.com</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <p class="footer-wordmark">Luminota Studio</p>
+    <p class="footer-note">Travel planning templates for trips worth doing right.</p>
+  </footer>
+
+</body>
+</html>
